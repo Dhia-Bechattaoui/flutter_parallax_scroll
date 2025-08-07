@@ -1,0 +1,22 @@
+name: flutter_parallax_scroll
+description: A package for creating beautiful parallax scrolling effects with customizable speed and direction
+version: 0.0.3
+homepage: https://github.com/dhia-bechattaoui/flutter_parallax_scroll
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  # Add any assets here if needed
+  # assets:
+  #   - assets/images/ 
