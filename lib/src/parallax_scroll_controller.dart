@@ -5,6 +5,14 @@ import 'parallax_direction.dart';
 
 /// Controller for managing parallax scroll effects
 class ParallaxScrollController extends ChangeNotifier {
+  /// Creates a new [ParallaxScrollController] with default configuration.
+  ///
+  /// The default configuration includes:
+  /// - Speed: 1.0
+  /// - Direction: [ParallaxDirection.forward]
+  /// - Enabled: true
+  ParallaxScrollController();
+
   /// Current scroll offset
   double _scrollOffset = 0.0;
 

@@ -154,7 +154,7 @@ controller.reset();
 ```dart
 Container(
   height: 400,
-  child: Stack(
+  child: const Stack(
     children: [
       // Parallax background
       Positioned.fill(

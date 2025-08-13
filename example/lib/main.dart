@@ -12,10 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Parallax Scroll Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
       home: const ParallaxDemoPage(),
     );
   }
@@ -175,10 +172,7 @@ class _ParallaxDemoPageState extends State<ParallaxDemoPage> {
         children: [
           Text(
             'Controls',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 20),
 
@@ -193,10 +187,7 @@ class _ParallaxDemoPageState extends State<ParallaxDemoPage> {
               setState(() {
                 _speed = value;
                 _controller.updateConfig(
-                  ParallaxConfig(
-                    speed: _speed,
-                    direction: _direction,
-                  ),
+                  ParallaxConfig(speed: _speed, direction: _direction),
                 );
               });
             },
@@ -212,10 +203,7 @@ class _ParallaxDemoPageState extends State<ParallaxDemoPage> {
                 setState(() {
                   _direction = value;
                   _controller.updateConfig(
-                    ParallaxConfig(
-                      speed: _speed,
-                      direction: _direction,
-                    ),
+                    ParallaxConfig(speed: _speed, direction: _direction),
                   );
                 });
               }
@@ -311,10 +299,7 @@ class _ParallaxDemoPageState extends State<ParallaxDemoPage> {
         children: [
           Text(
             'Direction Examples',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 20),
 

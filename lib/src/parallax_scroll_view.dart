@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'parallax_config.dart';
 import 'parallax_scroll_controller.dart';
 import 'parallax_scroll_item.dart';
@@ -36,14 +37,12 @@ class ParallaxScrollView extends StatefulWidget {
 
 class _ParallaxScrollViewState extends State<ParallaxScrollView> {
   late ParallaxScrollController _controller;
-  late ScrollController _scrollController;
+  double _lastScrollOffset = 0.0;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ?? ParallaxScrollController();
-    _scrollController = ScrollController();
-    _scrollController.addListener(_onScrollChanged);
   }
 
   @override
@@ -54,27 +53,28 @@ class _ParallaxScrollViewState extends State<ParallaxScrollView> {
     }
   }
 
-  void _onScrollChanged() {
-    final offset = _scrollController.offset;
-    _controller.updateScrollOffset(offset);
-
-    if (widget.enableScrollDirection) {
-      final direction = _scrollController.position.userScrollDirection;
-      _controller.updateScrollDirection(direction);
-    }
-
-    if (widget.enableScrollState) {
-      final isScrolling = _scrollController.position.isScrollingNotifier.value;
-      _controller.updateScrollingState(isScrolling);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         if (notification is ScrollUpdateNotification) {
-          _controller.updateScrollOffset(notification.metrics.pixels);
+          final offset = notification.metrics.pixels;
+          _controller.updateScrollOffset(offset);
+
+          if (widget.enableScrollDirection) {
+            final currentOffset = notification.metrics.pixels;
+            final direction = currentOffset > _lastScrollOffset
+                ? ScrollDirection.forward
+                : currentOffset < _lastScrollOffset
+                    ? ScrollDirection.reverse
+                    : ScrollDirection.idle;
+            _controller.updateScrollDirection(direction);
+            _lastScrollOffset = currentOffset;
+          }
+
+          if (widget.enableScrollState) {
+            _controller.updateScrollingState(true);
+          }
         }
         return false;
       },
@@ -84,8 +84,6 @@ class _ParallaxScrollViewState extends State<ParallaxScrollView> {
 
   @override
   void dispose() {
-    _scrollController.removeListener(_onScrollChanged);
-    _scrollController.dispose();
     if (widget.controller == null) {
       _controller.dispose();
     }

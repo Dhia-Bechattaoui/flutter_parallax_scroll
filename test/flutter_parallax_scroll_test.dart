@@ -52,29 +52,31 @@ void main() {
       expect(controller.config.enabled, false);
     });
 
-    test('should calculate parallax offset correctly for forward direction',
-        () {
-      final controller = ParallaxScrollController();
-      controller.updateConfig(ParallaxConfig(
-        speed: 0.5,
-        direction: ParallaxDirection.forward,
-      ));
-      controller.updateScrollOffset(100.0);
+    test(
+      'should calculate parallax offset correctly for forward direction',
+      () {
+        final controller = ParallaxScrollController();
+        controller.updateConfig(
+          ParallaxConfig(speed: 0.5, direction: ParallaxDirection.forward),
+        );
+        controller.updateScrollOffset(100.0);
 
-      expect(controller.calculateParallaxOffset(), 50.0);
-    });
+        expect(controller.calculateParallaxOffset(), 50.0);
+      },
+    );
 
-    test('should calculate parallax offset correctly for reverse direction',
-        () {
-      final controller = ParallaxScrollController();
-      controller.updateConfig(ParallaxConfig(
-        speed: 0.5,
-        direction: ParallaxDirection.reverse,
-      ));
-      controller.updateScrollOffset(100.0);
+    test(
+      'should calculate parallax offset correctly for reverse direction',
+      () {
+        final controller = ParallaxScrollController();
+        controller.updateConfig(
+          ParallaxConfig(speed: 0.5, direction: ParallaxDirection.reverse),
+        );
+        controller.updateScrollOffset(100.0);
 
-      expect(controller.calculateParallaxOffset(), -50.0);
-    });
+        expect(controller.calculateParallaxOffset(), -50.0);
+      },
+    );
 
     test('should return 0 when disabled', () {
       final controller = ParallaxScrollController();
@@ -178,18 +180,15 @@ void main() {
   });
 
   group('Widget Tests', () {
-    testWidgets('ParallaxScrollItem should render child when disabled',
-        (WidgetTester tester) async {
+    testWidgets('ParallaxScrollItem should render child when disabled', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: ParallaxScrollItem(
               config: const ParallaxConfig(enabled: false),
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.red,
-              ),
+              child: Container(width: 100, height: 100, color: Colors.red),
             ),
           ),
         ),
@@ -200,18 +199,15 @@ void main() {
       expect(find.byType(ParallaxScrollItem), findsOneWidget);
     });
 
-    testWidgets('ParallaxScrollItem should apply transform when enabled',
-        (WidgetTester tester) async {
+    testWidgets('ParallaxScrollItem should apply transform when enabled', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: ParallaxScrollItem(
               config: const ParallaxConfig(enabled: true),
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.red,
-              ),
+              child: Container(width: 100, height: 100, color: Colors.red),
             ),
           ),
         ),
@@ -221,17 +217,14 @@ void main() {
       expect(find.byType(ParallaxScrollItem), findsOneWidget);
     });
 
-    testWidgets('ParallaxScrollView should render child',
-        (WidgetTester tester) async {
+    testWidgets('ParallaxScrollView should render child', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: ParallaxScrollView(
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.blue,
-              ),
+              child: Container(width: 100, height: 100, color: Colors.blue),
             ),
           ),
         ),
